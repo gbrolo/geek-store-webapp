@@ -12,6 +12,18 @@ import reducer from './reducer';
 import saga from './saga';
 import { mount, unmount } from './actions';
 
+import {
+  Grid,
+  Typography,
+  makeStyles,
+} from '@material-ui/core';
+
+const useStyles = makeStyles(theme => ({
+  wrapper: {
+    width: '100%',
+  },
+}));
+
 export function ProductsContainer({
   productsContainer,
   onMount,
@@ -19,6 +31,8 @@ export function ProductsContainer({
 }) {
   useInjectReducer({ key: 'productsContainer', reducer });
   useInjectSaga({ key: 'productsContainer', saga });
+
+  const classes = useStyles();
 
   useEffect(() => {
     onMount();
@@ -29,9 +43,23 @@ export function ProductsContainer({
   }, []);
 
   return (
-    <div>
-      <h3>ProductsContainer</h3>
-    </div>
+    <Grid 
+      container
+      spacing={2}
+      className={classes.wrapper}
+    >
+      <Grid
+        item
+        xs={"auto"} sm={"auto"} md={"auto"} lg={"auto"} xl={"auto"}
+      >
+        <Typography
+          variant="h4"
+          align="center"
+        >
+          ProductsContainer
+        </Typography>
+      </Grid>
+    </Grid>
   );
 }
 
