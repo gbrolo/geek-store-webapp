@@ -5,11 +5,11 @@ const defaultThemeSchema = {
     tonalOffset: 0.2,
     contrastThreshold: 3,
     primary: {
-      main: '#24305E',
+      main: '#041B2D',
       contrastText: '#fff',
     },
     secondary: {
-      main: '#5e2444',
+      main: '#E69D45',
       contrastText: '#fff',
     },
     error: {

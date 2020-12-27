@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   makeStyles,
 } from '@material-ui/core';
+import AppMenuBar from '../AppMenuBar';
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -24,6 +25,7 @@ function ComponentWrapper({
 
   return (
     <React.Fragment>
+      <AppMenuBar />
       <div className={classes.wrapper}>
         {children}
       </div>
