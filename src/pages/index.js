@@ -5,7 +5,8 @@ import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 
-import ProductsContainer from '../components/ProductsContainer'
+import ProductsContainer from '../components/ProductsContainer/Loadable'
+import ComponentWrapper from "../components/ComponentWrapper"
 
 // const IndexPage = () => (
 //   <Layout>
@@ -22,10 +23,10 @@ import ProductsContainer from '../components/ProductsContainer'
 // )
 
 const IndexPage = () => (
-  <Layout>
+  <ComponentWrapper>
     <SEO title="Geek Store" />
-    <ProductsContainer />    
-  </Layout>
+    <ProductsContainer />
+  </ComponentWrapper>
 )
 
 export default IndexPage

@@ -18,6 +18,7 @@ export const initialState = {
   search: null,
   totalPages: 1,
   stopFetching: false,
+  renderContent: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -26,6 +27,7 @@ const productsContainerReducer = (state = initialState, action) =>
     switch (action.type) {
       case SET_PRODUCTS:
         draft.loading = false;
+        draft.renderContent = true;
         draft.products = [...draft.products, ...action.productsRequestPayload.products];
         draft.totalPages = action.productsRequestPayload.totalPages;
         draft.page = draft.page + 1;
@@ -57,6 +59,7 @@ const productsContainerReducer = (state = initialState, action) =>
         draft.search = null;
         draft.totalPages = 1;
         draft.stopFetching = false;
+        draft.renderContent = false;
         break;
     }
   });
