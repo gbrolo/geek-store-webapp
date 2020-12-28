@@ -6,6 +6,7 @@ import {
 import AppMenuBar from '../AppMenuBar';
 import AppDrawer from '../AppDrawer';
 import AppSearchDrawer from '../AppSearchDrawer';
+import ProcessFeedback from '../ProcessFeedback';
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -30,6 +31,7 @@ function ComponentWrapper({
       <AppDrawer />
       <AppMenuBar />
       <AppSearchDrawer />
+      <ProcessFeedback />
       <div className={classes.wrapper}>
         {children}
       </div>

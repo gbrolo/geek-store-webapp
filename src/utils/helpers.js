@@ -1,3 +1,5 @@
+import { processFeedbackInitialState } from "../components/ProcessFeedback/reducer";
+
 const determineIfProductIsOnSale = (
   product    
 ) => {
@@ -56,8 +58,17 @@ const parseProductImagesToSliderFormat = (images) => {
   }
 };
 
+const setProcessFeedback = (
+  receivedSettings, 
+  showDefaultProcessingMessage = false, 
+  open = true
+) => {
+  return {...processFeedbackInitialState.settings, ...receivedSettings, showDefaultProcessingMessage, open};
+};
+
 export {
   shortenString,
+  setProcessFeedback,
   selectValidPriceForProduct,
   determineIfProductIsOnSale,
   selectCorrectSaleForProduct,  

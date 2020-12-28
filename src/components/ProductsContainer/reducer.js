@@ -8,6 +8,7 @@ import {
   GET_SINGLE_PRODUCT,
   SHOW_SINGLE_PRODUCT,
   SET_CURRENT_PRODUCT,
+  ADD_PRODUCT_TO_CART,
 } from './constants';
 
 export const initialState = {
@@ -31,6 +32,8 @@ export const initialState = {
 const productsContainerReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case ADD_PRODUCT_TO_CART:
+        break;
       case GET_SINGLE_PRODUCT:
         draft.showCurrentItem = false;
         draft.currentItem = action.currentItem;

@@ -4,6 +4,8 @@ import makeSelectSearchComponent from '../SearchComponent/selectors';
 import { finishedSearch, unmount } from './actions';
 import makeSelectAppSearchDrawer from './selectors';
 import { requestGetProducts } from '../../axios/providers/products';
+import { showProcessFeedback } from '../ProcessFeedback/actions';
+import { setProcessFeedback } from '../../utils/helpers';
 
 // Individual exports for testing
 export default function* appSearchDrawerSaga() {
@@ -20,6 +22,7 @@ export function* toggleAppSearchDrawerSaga() {
 }
 
 export function* initiateSearchSaga() {
+  yield put(showProcessFeedback(setProcessFeedback({}, true)));
   const searchComponent = yield(select(makeSelectSearchComponent()));  
 
   if (searchComponent.queryString !== "") {
@@ -33,6 +36,10 @@ export function* initiateSearchSaga() {
     } catch (error) {
       const response = error();    
       yield put(finishedSearch());
+      yield put(showProcessFeedback(setProcessFeedback({
+        message: response.message,
+        severity: 'error',
+      })));
     }
   } else {
     yield put(finishedSearch(null));

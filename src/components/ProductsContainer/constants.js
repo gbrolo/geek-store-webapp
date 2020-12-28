@@ -6,3 +6,4 @@ export const SELECT_CATEGORY = 'src/components/ProductsContainer/SELECT_CATEGORY
 export const GET_SINGLE_PRODUCT = 'src/components/ProductsContainer/GET_SINGLE_PRODUCT';
 export const SHOW_SINGLE_PRODUCT = 'src/components/ProductsContainer/SHOW_SINGLE_PRODUCT';
 export const SET_CURRENT_PRODUCT = 'src/components/ProductsContainer/SET_CURRENT_PRODUCT';
+export const ADD_PRODUCT_TO_CART = 'src/components/ProductsContainer/ADD_PRODUCT_TO_CART';

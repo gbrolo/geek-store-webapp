@@ -10,7 +10,7 @@ import { useInjectReducer } from '../../utils/injectReducer';
 import makeSelectProductsContainer from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { getProducts, getSingleProduct, mount, showSingleProduct, unmount } from './actions';
+import { addProductToCart, getProducts, getSingleProduct, mount, showSingleProduct, unmount } from './actions';
 
 import {
   Grid,
@@ -48,6 +48,7 @@ export function ProductsContainer({
   onGetProducts,
   onGetSingleProduct,
   onShowSingleProduct,
+  onAddProductToCart,
 }) {
   useInjectReducer({ key: 'productsContainer', reducer });
   useInjectSaga({ key: 'productsContainer', saga });
@@ -128,6 +129,7 @@ export function ProductsContainer({
         productsContainer.showCurrentItem ?
         <ProductViewer
           product={productsContainer.currentItem}
+          onAddProductToCart={onAddProductToCart}
           onClose={() => onShowSingleProduct(false)}
         /> :
         null
@@ -155,6 +157,7 @@ function mapDispatchToProps(dispatch) {
     onGetProducts: (condition, size, page, search) => dispatch(getProducts(condition, size, page, search)),
     onGetSingleProduct: (currentItem) => dispatch(getSingleProduct(currentItem)),
     onShowSingleProduct: (showCurrentItem) => dispatch(showSingleProduct(showCurrentItem)),
+    onAddProductToCart: () => dispatch(addProductToCart()),
   };
 }
 

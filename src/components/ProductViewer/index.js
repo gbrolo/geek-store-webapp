@@ -324,34 +324,11 @@ const computeAvailability = (product) => {
   return product.stock > 0;
 };
 
-function Heartbeat(props) {
-  return (
-    <motion.div 
-      animate={props.active ? {
-        scale: [1, 1.05, 1],
-      } : undefined}
-      transition={props.active ? {
-        duration: 1,
-        ease: "easeInOut",  
-        times: [0, 0.5, 1],          
-        loop: Infinity,
-        repeatDelay: 2
-      } : undefined}         
-      whileHover={props.active ? { 
-        scale: 1.05,
-        transition: { duration: 0.2 },
-      } : undefined}
-      whileTap={props.active ? { scale: 0.9 } : undefined}
-    >
-      {props.children}
-    </motion.div>
-  );
-}
-
 function ProductViewer({
   root,
   product,
   onClose,
+  onAddProductToCart,
 }) {
   const classes = useStyles();
   const [images, setImages] = useState([]);
@@ -695,25 +672,21 @@ function ProductViewer({
   );
 
   const renderAddToCartButton = (active = undefined) => (
-    <Heartbeat
-      active={active}
+    <Button
+      variant="contained"
+      className={classes.ProductViewerAddToCartButton}
+      onClick={onAddProductToCart}
+      disabled={
+        !(isAvailable)
+      }
     >
-      <Button
-        variant="contained"
-        className={classes.ProductViewerAddToCartButton}
-        onClick={() => {}}
-        disabled={
-          !(isAvailable)
-        }
+      <Typography
+        variant="overline"
+        className={classes.ProductViewerAddToCartButtonText}
       >
-        <Typography
-          variant="overline"
-          className={classes.ProductViewerAddToCartButtonText}
-        >
-          Añadir al carrito
-        </Typography>
-      </Button>
-    </Heartbeat>
+        Añadir al carrito
+      </Typography>
+    </Button>
   );
 
   const renderViewer = () => (

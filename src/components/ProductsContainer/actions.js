@@ -7,7 +7,14 @@ import {
   GET_SINGLE_PRODUCT,
   SHOW_SINGLE_PRODUCT,
   SET_CURRENT_PRODUCT,
+  ADD_PRODUCT_TO_CART,
 } from './constants';
+
+export function addProductToCart() {
+  return {
+    type: ADD_PRODUCT_TO_CART,
+  };
+}
 
 export function setCurrentProduct(currentItem) {
   return {

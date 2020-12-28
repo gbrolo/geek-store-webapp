@@ -1,7 +1,9 @@
 import { takeLatest, put } from 'redux-saga/effects';
 import { requestGetAllCategories } from './axios/providers/categories';
+import { showProcessFeedback } from './components/ProcessFeedback/actions';
 import { getCategories, setCategories } from './rootActions';
 import { GET_CATEGORIES } from './rootConstants';
+import { setProcessFeedback } from './utils/helpers';
 
 export default function* productsContainerSaga() {
   yield takeLatest(GET_CATEGORIES, getCategoriesSaga);
@@ -11,11 +13,13 @@ export default function* productsContainerSaga() {
 
 export function* getCategoriesSaga() {  
   try {
-    const data = yield requestGetAllCategories();
-    yield console.log(data.body);
+    const data = yield requestGetAllCategories();    
     yield put(setCategories(data.body));
   } catch (error) {
-    const response = yield error();
-    yield console.log(response);
+    const response = yield error();    
+    yield put(showProcessFeedback(setProcessFeedback({
+      message: response.message,
+      severity: 'error',
+    })));
   }
 }

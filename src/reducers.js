@@ -4,6 +4,7 @@
 
 import { combineReducers } from 'redux';
 import rootRed from './rootReducer';
+import processFeedbackReducer from './components/ProcessFeedback/reducer';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -11,6 +12,7 @@ import rootRed from './rootReducer';
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
     root: rootRed,
+    feedback: processFeedbackReducer,
     ...injectedReducers,
   });
 
