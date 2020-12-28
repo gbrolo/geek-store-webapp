@@ -4,7 +4,31 @@ import {
   GET_PRODUCTS,
   SET_PRODUCTS,
   SELECT_CATEGORY,
+  GET_SINGLE_PRODUCT,
+  SHOW_SINGLE_PRODUCT,
+  SET_CURRENT_PRODUCT,
 } from './constants';
+
+export function setCurrentProduct(currentItem) {
+  return {
+    type: SET_CURRENT_PRODUCT,
+    currentItem,
+  };
+}
+
+export function showSingleProduct(showCurrentItem) {
+  return {
+    type: SHOW_SINGLE_PRODUCT,
+    showCurrentItem,
+  };
+}
+
+export function getSingleProduct(currentItem) {
+  return {
+    type: GET_SINGLE_PRODUCT,
+    currentItem,
+  };
+}
 
 export function selectCategory(category) {
   return {

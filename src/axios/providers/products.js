@@ -4,6 +4,15 @@ import { responseFormatter } from "../response";
 
 const { ROUTES, API_BASE_URL } = constants;
 
+const requestGetProduct = (
+  id,
+) => {
+  return responseFormatter(axios.get(
+    API_BASE_URL + ROUTES.PRODUCTS +
+    `/${id}`,
+  ));
+};
+
 const requestGetProducts = (
   size,
   page,
@@ -34,6 +43,7 @@ const requestGetProductsAdvanced = (
 };
 
 export {
+  requestGetProduct,
   requestGetProducts,
   requestGetProductsAdvanced,
 }

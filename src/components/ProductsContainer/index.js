@@ -10,15 +10,18 @@ import { useInjectReducer } from '../../utils/injectReducer';
 import makeSelectProductsContainer from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { getProducts, mount, unmount } from './actions';
+import { getProducts, getSingleProduct, mount, showSingleProduct, unmount } from './actions';
 
 import {
   Grid,
+  Slide,
+  Dialog,
   Typography,
   makeStyles,
 } from '@material-ui/core';
 import Loading from '../Loading';
 import ProductCard from '../ProductCard/Loadable';
+import ProductViewer from '../ProductViewer/Loadable';
 
 const useStyles = makeStyles(theme => ({
   grid: {
@@ -34,11 +37,17 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 export function ProductsContainer({
   productsContainer,
   onMount,
   onUnmount,
   onGetProducts,
+  onGetSingleProduct,
+  onShowSingleProduct,
 }) {
   useInjectReducer({ key: 'productsContainer', reducer });
   useInjectSaga({ key: 'productsContainer', saga });
@@ -97,7 +106,7 @@ export function ProductsContainer({
             <ProductCard              
               product={product}
               renderContent={productsContainer.renderContent}
-              onLoadSingleProduct={() => {}}
+              onLoadSingleProduct={onGetSingleProduct}
             />
           </Grid>
         ))
@@ -108,10 +117,29 @@ export function ProductsContainer({
     null
   );
 
+  const renderProductViewer = () => (
+    <Dialog
+      fullScreen
+      open={productsContainer.showCurrentItem}
+      onClose={() => onShowSingleProduct(false)}
+      TransitionComponent={Transition}      
+    >
+      {
+        productsContainer.showCurrentItem ?
+        <ProductViewer
+          product={productsContainer.currentItem}
+          onClose={() => onShowSingleProduct(false)}
+        /> :
+        null
+      }
+    </Dialog>
+  );
+
   return (
     <React.Fragment>
       {renderProducts()}
       {renderLoadingSpinner()}
+      {renderProductViewer()}
     </React.Fragment>
   );
 }
@@ -125,6 +153,8 @@ function mapDispatchToProps(dispatch) {
     onMount: () => dispatch(mount()),
     onUnmount: () => dispatch(unmount()),
     onGetProducts: (condition, size, page, search) => dispatch(getProducts(condition, size, page, search)),
+    onGetSingleProduct: (currentItem) => dispatch(getSingleProduct(currentItem)),
+    onShowSingleProduct: (showCurrentItem) => dispatch(showSingleProduct(showCurrentItem)),
   };
 }
 

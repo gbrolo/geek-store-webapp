@@ -43,7 +43,7 @@ import Loading from '../../components/Loading';
 import SearchComponent from '../SearchComponent/Loadable';
 import makeSelectSearchComponent from '../SearchComponent/selectors';
 import { selectValidPriceForProduct, selectCorrectSaleForProduct, determineIfProductIsOnSale } from '../../utils/helpers';
-import { getProducts, unmount as unmountProducts } from '../ProductsContainer/actions';
+import { getProducts, getSingleProduct, unmount as unmountProducts } from '../ProductsContainer/actions';
 import makeSelectProductsContainer from '../ProductsContainer/selectors';
 
 const useStyles = makeStyles(theme => ({
@@ -166,11 +166,13 @@ function SearchListItem({
   item,
   slideIn,
 
+  onOpenItem,
   onToggleAppSearchDrawer,
 }) {
   const classes = useStyles();
 
   const handleSelectedItem = () => {
+    onOpenItem(item.id);
     onToggleAppSearchDrawer();    
   };
 
@@ -255,6 +257,7 @@ export function AppSearchDrawer({
   onUnmount,
   onGetProducts,
   onInitiateSearch,
+  onGetSingleProduct,
   onToggleAppSearchDrawer,
   onUnmountProductsContainer,
 }) {
@@ -335,6 +338,7 @@ export function AppSearchDrawer({
               key={item.id}
               item={item}              
               searchComponentValue={searchComponentValue}
+              onOpenItem={onGetSingleProduct}
               onToggleAppSearchDrawer={onToggleAppSearchDrawer}
               slideIn={appSearchDrawer.content !== null && appSearchDrawer.content.length > 0}
             />
@@ -468,6 +472,7 @@ function mapDispatchToProps(dispatch) {
     onInitiateSearch: () => dispatch(initiateSearch()),
     onToggleAppSearchDrawer: () => dispatch(toggleAppSearchDrawer()),
     onUnmountProductsContainer: () => dispatch(unmountProducts()),
+    onGetSingleProduct: (currentItem) => dispatch(getSingleProduct(currentItem)),
   };
 }
 

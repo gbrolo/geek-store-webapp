@@ -1,13 +1,26 @@
 import { takeLatest, select, put, delay } from 'redux-saga/effects';
-import { requestGetProducts, requestGetProductsAdvanced } from '../../axios/providers/products';
-import { getProducts, mount, setProducts } from './actions';
-import { GET_PRODUCTS, MOUNT, SELECT_CATEGORY } from './constants';
+import { requestGetProduct, requestGetProducts, requestGetProductsAdvanced } from '../../axios/providers/products';
+import { getProducts, mount, setCurrentProduct, setProducts } from './actions';
+import { GET_PRODUCTS, GET_SINGLE_PRODUCT, MOUNT, SELECT_CATEGORY } from './constants';
 import makeSelectProductsContainer from './selectors';
 
 export default function* productsContainerSaga() {
   yield takeLatest(MOUNT, mountSaga);
   yield takeLatest(GET_PRODUCTS, getProductsSaga);
   yield takeLatest(SELECT_CATEGORY, selectCategorySaga);
+  yield takeLatest(GET_SINGLE_PRODUCT, getSingleProductSaga);
+}
+
+export function* getSingleProductSaga() {
+  const productsContainer = yield select(makeSelectProductsContainer());
+
+  try {
+    const data = yield requestGetProduct(productsContainer.currentItem);
+    yield put(setCurrentProduct(data.body));
+  } catch (error) {
+    const response = yield error();
+    yield console.log(response);
+  }
 }
 
 export function* selectCategorySaga() {

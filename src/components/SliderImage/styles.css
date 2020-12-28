@@ -1,0 +1,228 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+.react-slider img {
+  /* border: thin solid #ccc; */
+  width: 100%;
+  height: 100%;
+  display: block;
+  text-indent: -9999px;
+}
+
+.react-slider__ul {  
+  margin: 0px 0 0 0;  
+}
+
+@media (max-width: 960px) {
+  .react-slider__ul {
+    /* display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    flex-flow: column wrap; */
+    margin: 20px 0 0 0;
+    width: 100%;
+    min-width: 300px;
+    /* flex-flow: row; */
+  }
+}
+
+.react-slider__ul li { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  position: relative;
+  width: 75px;
+  min-height: 75px;  
+  min-width: 'auto';
+  cursor: pointer;
+  padding: 0;
+  list-style: none;
+  margin: 1%;  
+}
+
+.react-slider__ul li:nth-child(3n -1) {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.react-slider__ul li:hover {
+  opacity: .7;
+}
+
+.react-slider__ul li.active img {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 2px solid rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
+}
+
+.react-slider__container {
+  position: relative;
+}
+
+/* .react-slider__container button {
+  width: 31px;
+  height: 70px;
+  background: #999;
+  position: absolute;
+  top: 50%;
+  z-index: 4;
+  transform: translateY(-55%);
+  opacity: 0.75;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+.react-slider__container button::before {
+  content: '';
+  border: thin solid #fff;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+} */
+
+.react-slider__btnPrev {
+  left: 0;
+}
+
+.react-slider__btnPrev::before {
+  transform: rotate(135deg);
+}
+
+.react-slider__btnNext {
+  right: -1px;
+}
+
+.react-slider__btnNext::before {
+  transform: rotate(-45deg);
+}
+
+.react-slider__lens {
+  position: absolute;
+  z-index: 3;
+  /* border: 1px solid #d4d4d4; */
+  width: 200px;
+  height: 200px;
+  background-color: rgba(0, 0, 0, 0);  
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+}
+
+.react-slider__lens:hover {
+  cursor: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-image: radial-gradient(black 1px, transparent 0);
+  background-size: 5px 5px;
+  background-position: 0px 0px;
+  border: solid 3px rgba(0, 0, 0, 0.7);
+  transition: opacity .3s ease-in-out;
+}
+
+.react-slider__lens:hover::after {
+  content: ' ';
+  position: absolute;
+  border-left: solid 1px rgba(0,0,0,0.7);  
+  left: 50%;
+  height: 100%;
+  z-index: 4;
+  transition: opacity .3s ease-in-out;
+}
+
+.react-slider__lens:hover::before {
+  content: ' ';
+  position: absolute;
+  border-top: solid 1px rgba(0,0,0,0.7);  
+  top: 50%;
+  height: 100%;
+  width: 100%;
+  z-index: 4;
+  transition: opacity .3s ease-in-out;
+}
+
+@media (max-width: 600px) {
+  .react-slider__lens {
+    display: none;
+  }
+}
+
+.react-slider__picture {
+  min-height: 300px;
+}
+
+.react-slider__picture::after {
+  content: 'loading...';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top:0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1
+}
+
+.react-slider__imgZoom {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  transform: translateX(30px);
+  width: 500px;
+  height: 500px;
+  background-repeat: no-repeat;    
+  border: thin solid #ccc;
+  opacity: 0;
+  z-index: -9999;
+  transition: opacity .5s ease-in-out;  
+  margin-left: 30px;
+}
+
+@media (max-width: 600px) {
+  .react-slider__imgZoom {
+    display: none;
+  }
+}
+
+.react-slider__areaZoom:hover .react-slider__lens {
+  opacity: 0.7;
+  /* border: solid 3px rgba(0, 0, 0, 0.7); */
+}
+
+.react-slider__areaZoom:hover  .react-slider__imgZoom {
+  opacity: 1;
+  z-index: 1;
+  border: solid 5px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.75);
+  background-color: #fff;
+} 
+
+.react-slider__areaZoom img {
+  z-index: 2;
+  position: relative;  
+}
+
+.react-slider__description {
+  position: absolute;
+  z-index: 2;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  background-color: #c5bdbd;
+  padding: 2px 5px;
+  color: #fff;
+  opacity: 0.7;
+  font-size: 14px;
+}

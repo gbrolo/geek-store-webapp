@@ -5,6 +5,9 @@ import {
   GET_PRODUCTS,
   SET_PRODUCTS,
   SELECT_CATEGORY,
+  GET_SINGLE_PRODUCT,
+  SHOW_SINGLE_PRODUCT,
+  SET_CURRENT_PRODUCT,
 } from './constants';
 
 export const initialState = {
@@ -20,12 +23,25 @@ export const initialState = {
   totalPages: 1,
   stopFetching: false,
   renderContent: false,
+  currentItem: null,
+  showCurrentItem: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
 const productsContainerReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case GET_SINGLE_PRODUCT:
+        draft.showCurrentItem = false;
+        draft.currentItem = action.currentItem;
+        break;
+      case SHOW_SINGLE_PRODUCT:
+        draft.showCurrentItem = action.showCurrentItem;
+        break;
+      case SET_CURRENT_PRODUCT:
+        draft.currentItem = action.currentItem;
+        draft.showCurrentItem = true;
+        break;
       case SELECT_CATEGORY:
         if (action.category !== 'FEATURED') {
           draft.condition = {
@@ -81,6 +97,8 @@ const productsContainerReducer = (state = initialState, action) =>
         draft.totalPages = 1;
         draft.stopFetching = false;
         draft.renderContent = false;
+        draft.currentItem = null;
+        draft.showCurrentItem = false;
         break;
     }
   });

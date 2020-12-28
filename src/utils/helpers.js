@@ -43,9 +43,23 @@ const shortenString = (text, maxChars) => {
   }
 };
 
+const parseProductImagesToSliderFormat = (images) => {
+  try {
+    return images.map(image => {
+      return ({
+        image: image,
+        text: '',
+      });
+    });
+  } catch (error) {
+    return [];
+  }
+};
+
 export {
   shortenString,
   selectValidPriceForProduct,
   determineIfProductIsOnSale,
-  selectCorrectSaleForProduct,
+  selectCorrectSaleForProduct,  
+  parseProductImagesToSliderFormat,
 }
