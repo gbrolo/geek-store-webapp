@@ -22,7 +22,7 @@ import ProductCard from '../ProductCard/Loadable';
 
 const useStyles = makeStyles(theme => ({
   grid: {
-    width: '95%',
+    width: '98%',
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
     '@media (min-width: 1440px)': {

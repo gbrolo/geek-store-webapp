@@ -27,6 +27,7 @@ import {
 import makeSelectRoot from '../../rootSelectors';
 import { selectCategory } from '../ProductsContainer/actions';
 import { CATEGORY_FEATURED } from './constants';
+import { toggleAppDrawer } from '../AppDrawer/actions';
 
 const useStyles = makeStyles(theme => ({
   AppMenuBarRoot: {
@@ -152,6 +153,7 @@ function AppMenuBarItem({
 function AppMenuBar({
   root,
   onSelectCategory,
+  onToggleAppDrawer,
 }) {
   const classes = useStyles();
 
@@ -231,7 +233,7 @@ function AppMenuBar({
         style={{ display: 'flex', justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}
       >
         <IconButton
-          onClick={() => {}}
+          onClick={() => onToggleAppDrawer()}
           className={classes.AppMenuBarMenuIcon}          
         >
           <MenuSharp />
@@ -286,6 +288,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    onToggleAppDrawer: () => dispatch(toggleAppDrawer()),
     onSelectCategory: (category) => dispatch(selectCategory(category)),
   }
 };

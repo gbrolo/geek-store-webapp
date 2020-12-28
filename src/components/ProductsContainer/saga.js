@@ -1,4 +1,4 @@
-import { takeLatest, select, put } from 'redux-saga/effects';
+import { takeLatest, select, put, delay } from 'redux-saga/effects';
 import { requestGetProductsAdvanced } from '../../axios/providers/products';
 import { getProducts, mount, setProducts } from './actions';
 import { GET_PRODUCTS, MOUNT, SELECT_CATEGORY } from './constants';
@@ -24,7 +24,8 @@ export function* getProductsSaga() {
         productsContainer.size,
         productsContainer.page,
         productsContainer.search,
-      );      
+      );
+      yield delay(1000);      
       yield put(setProducts(data.body));
     } catch (error) {
       const response = yield error();
