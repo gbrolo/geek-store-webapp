@@ -12,6 +12,24 @@ const selectValidPriceForProduct = (
   else return product.price
 };
 
+const selectCorrectSaleForProduct = (
+  product,
+  responseComponents = null,
+) => {
+  const responses = responseComponents || {
+    salePrice: 'Sale price',
+    normal: 'Normal price'
+  };
+
+  if (determineIfProductIsOnSale(product)) {
+    if (product.hasOwnProperty('salePrice')) {
+      return responses['salePrice'];
+    }
+  } else {
+    return responses['normal'];
+  }
+};
+
 const shortenString = (text, maxChars) => {
   if (text.length > maxChars) {
     return `${[...text].reduce((shortened, currentChar, index) => {
@@ -29,4 +47,5 @@ export {
   shortenString,
   selectValidPriceForProduct,
   determineIfProductIsOnSale,
+  selectCorrectSaleForProduct,
 }

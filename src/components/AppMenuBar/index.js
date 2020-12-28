@@ -28,6 +28,7 @@ import makeSelectRoot from '../../rootSelectors';
 import { selectCategory } from '../ProductsContainer/actions';
 import { CATEGORY_FEATURED } from './constants';
 import { toggleAppDrawer } from '../AppDrawer/actions';
+import { toggleAppSearchDrawer } from '../AppSearchDrawer/actions';
 
 const useStyles = makeStyles(theme => ({
   AppMenuBarRoot: {
@@ -154,18 +155,20 @@ function AppMenuBar({
   root,
   onSelectCategory,
   onToggleAppDrawer,
+  onToggleAppSearchDrawer,
 }) {
   const classes = useStyles();
 
   const renderLogo = () => (
-    <div
-      className={classes.AppMenuBarLogoDefaultOptions}      
+    <motion.div
+      onTap={() => onSelectCategory(CATEGORY_FEATURED.id)}
+      className={classes.AppMenuBarLogoDefaultOptions}
     >
       <img
         src="https://cdn1.emarketxpress.com/products/geekstore-logo-2.png?token=9lc6wv5c8khqvbj06-1605913308150"
         className={classes.AppMenuBarLogoImageOptions}
       />
-    </div>
+    </motion.div>
   );
 
   const renderNonMobileBar = () => (
@@ -205,6 +208,7 @@ function AppMenuBar({
                 [CATEGORY_FEATURED, ...root.categories].map(category => (
                   <Grid
                     item
+                    key={category._id}
                     xs={"auto"} sm={"auto"} md={"auto"} lg={"auto"}
                   >
                     <AppMenuBarItem
@@ -215,6 +219,17 @@ function AppMenuBar({
                   </Grid>
                 ))
               }
+              <Grid
+                item
+                xs={"auto"} sm={"auto"} md={"auto"} lg={"auto"}
+              >
+                <IconButton
+                  onClick={() => onToggleAppSearchDrawer()}
+                  className={classes.AppMenuBarMenuIcon}          
+                >
+                  <SearchSharp />
+                </IconButton>
+              </Grid>
             </Grid>
           </Grid>
         </SlideComponent>
@@ -244,12 +259,24 @@ function AppMenuBar({
       >
         <Grid
           item
-          xs={10} sm={10} md={10} lg={10}
+          xs={8} sm={8} md={8} lg={8}
           className={classes.AppMenuBarMobileTitleContainer}
         >
           {renderLogo()}
         </Grid>
       </SlideComponent>
+      <Grid
+        item
+        xs={2} sm={2} md={2} lg={2}
+        style={{ display: 'flex', justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}
+      >
+        <IconButton
+          onClick={() => onToggleAppSearchDrawer()}
+          className={classes.AppMenuBarMenuIcon}          
+        >
+          <SearchSharp />
+        </IconButton>
+      </Grid>
     </Grid>
   );
 
@@ -290,6 +317,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onToggleAppDrawer: () => dispatch(toggleAppDrawer()),
     onSelectCategory: (category) => dispatch(selectCategory(category)),
+    onToggleAppSearchDrawer: () => dispatch(toggleAppSearchDrawer()),
   }
 };
 

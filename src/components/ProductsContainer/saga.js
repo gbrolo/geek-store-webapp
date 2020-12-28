@@ -1,5 +1,5 @@
 import { takeLatest, select, put, delay } from 'redux-saga/effects';
-import { requestGetProductsAdvanced } from '../../axios/providers/products';
+import { requestGetProducts, requestGetProductsAdvanced } from '../../axios/providers/products';
 import { getProducts, mount, setProducts } from './actions';
 import { GET_PRODUCTS, MOUNT, SELECT_CATEGORY } from './constants';
 import makeSelectProductsContainer from './selectors';
@@ -18,18 +18,33 @@ export function* getProductsSaga() {
   const productsContainer = yield select(makeSelectProductsContainer());
 
   if (yield !productsContainer.stopFetching) {
-    try {
-      const data = yield requestGetProductsAdvanced(
-        productsContainer.condition,
-        productsContainer.size,
-        productsContainer.page,
-        productsContainer.search,
-      );
-      yield delay(1000);      
-      yield put(setProducts(data.body));
-    } catch (error) {
-      const response = yield error();
-      yield console.log(response);
+    if (yield productsContainer.search === null) {
+      try {
+        const data = yield requestGetProductsAdvanced(
+          productsContainer.condition,
+          productsContainer.size,
+          productsContainer.page,
+          productsContainer.search,
+        );
+        yield delay(1000);      
+        yield put(setProducts(data.body));
+      } catch (error) {
+        const response = yield error();
+        yield console.log(response);
+      }
+    } else {
+      try {
+        const data = yield requestGetProducts(
+          productsContainer.size,
+          productsContainer.page,
+          productsContainer.search,
+        );
+        yield delay(1000);      
+        yield put(setProducts(data.body));
+      } catch (error) {
+        const response = yield error();
+        yield console.log(response);
+      }
     }
   }
 }

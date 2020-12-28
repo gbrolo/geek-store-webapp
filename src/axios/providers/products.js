@@ -4,6 +4,17 @@ import { responseFormatter } from "../response";
 
 const { ROUTES, API_BASE_URL } = constants;
 
+const requestGetProducts = (
+  size,
+  page,
+  search = null,
+) => {
+  return responseFormatter(axios.get(
+    API_BASE_URL + ROUTES.PRODUCTS +
+    `?size=${size}&page=${page}` + (search !== null ? `&search=${search}` : ''),
+  ));
+};
+
 const requestGetProductsAdvanced = (
   condition,
   size,
@@ -23,5 +34,6 @@ const requestGetProductsAdvanced = (
 };
 
 export {
+  requestGetProducts,
   requestGetProductsAdvanced,
 }

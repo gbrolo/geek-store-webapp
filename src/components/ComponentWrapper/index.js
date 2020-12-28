@@ -5,6 +5,7 @@ import {
 } from '@material-ui/core';
 import AppMenuBar from '../AppMenuBar';
 import AppDrawer from '../AppDrawer';
+import AppSearchDrawer from '../AppSearchDrawer';
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -28,6 +29,7 @@ function ComponentWrapper({
     <React.Fragment>
       <AppDrawer />
       <AppMenuBar />
+      <AppSearchDrawer />
       <div className={classes.wrapper}>
         {children}
       </div>
