@@ -4,6 +4,7 @@ import {
   UNMOUNT,
   GET_PRODUCTS,
   SET_PRODUCTS,
+  SELECT_CATEGORY,
 } from './constants';
 
 export const initialState = {
@@ -25,6 +26,26 @@ export const initialState = {
 const productsContainerReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case SELECT_CATEGORY:
+        if (action.category !== 'FEATURED') {
+          draft.condition = {
+            field: 'category',
+            value: action.category,
+          };
+        } else {
+          draft.condition = {
+            field: 'featured',
+            value: true,
+          };
+        }
+        draft.loading = [];
+        draft.products = [];
+        draft.page = 0;
+        draft.search = null;
+        draft.totalPages = 1;
+        draft.stopFetching = false;
+        draft.renderContent = false;
+        break;
       case SET_PRODUCTS:
         draft.loading = false;
         draft.renderContent = true;

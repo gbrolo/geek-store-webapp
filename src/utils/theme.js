@@ -1,6 +1,9 @@
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
 const defaultThemeSchema = {
+  typography: {
+    fontFamily: "'Rubik', sans-serif",
+  },
   palette: {
     tonalOffset: 0.2,
     contrastThreshold: 3,

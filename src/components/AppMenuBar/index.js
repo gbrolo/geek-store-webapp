@@ -25,6 +25,8 @@ import {
   AccountCircleSharp,
 } from '@material-ui/icons';
 import makeSelectRoot from '../../rootSelectors';
+import { selectCategory } from '../ProductsContainer/actions';
+import { CATEGORY_FEATURED } from './constants';
 
 const useStyles = makeStyles(theme => ({
   AppMenuBarRoot: {
@@ -48,9 +50,9 @@ const useStyles = makeStyles(theme => ({
   },
   AppMenuBarLogoImageOptions: {
     margin: 0,
-    maxHeight: '64px',
+    maxHeight: '60px',
     maxWidth: '100%',
-    '@media (min-width: 600px)': {
+    '@media (min-width: 750px)': {
       maxWidth: '65%',
     },
     '@media (min-width: 900px)': {
@@ -61,12 +63,12 @@ const useStyles = makeStyles(theme => ({
     },
   },
   AppMenuBarMobileGridContainer: {    
-    '@media (min-width: 600px)': {
+    '@media (min-width: 750px)': {
       display: 'none',
     },
   },
   AppMenuBarNonMobileGridContainer: {    
-    '@media (max-width: 600px)': {
+    '@media (max-width: 750px)': {
       display: 'none',
     },
   },
@@ -89,7 +91,8 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     zIndex: theme.zIndex.appBar + 1,
     width: '100%',    
-    top: 0,        
+    top: 0,     
+    height: '100%',   
   },
   AppMenuBarRightOptions: {
     display: 'flex',
@@ -100,9 +103,11 @@ const useStyles = makeStyles(theme => ({
   },
   AppMenuBarItem: {
     textTransform: 'uppercase',
-    fontSize: '0.75em',
-    letterSpacing: '0.2em',
-    color: theme.palette.secondary.main,
+    fontSize: '0.75em',    
+    color: theme.palette.primary.contrastText,
+    '&:hover': {
+      textDecoration: 'underline',
+    },
   },
 }));
 
@@ -121,13 +126,17 @@ function SlideComponent(props) {
 
 function AppMenuBarItem({
   category,
+  onSelectCategory,
 }) {
   const classes = useStyles();
+
+  const handleSelectCategory = () => {
+    onSelectCategory(category.id);
+  };
   
   return (
     <Button
-      variant="outlined"
-      color="secondary"
+      onClick={handleSelectCategory}
     >
       <Typography
         variant="caption"
@@ -142,18 +151,19 @@ function AppMenuBarItem({
 
 function AppMenuBar({
   root,
+  onSelectCategory,
 }) {
   const classes = useStyles();
 
   const renderLogo = () => (
-    <span
+    <div
       className={classes.AppMenuBarLogoDefaultOptions}      
     >
       <img
         src="https://cdn1.emarketxpress.com/products/geekstore-logo-2.png?token=9lc6wv5c8khqvbj06-1605913308150"
         className={classes.AppMenuBarLogoImageOptions}
       />
-    </span>
+    </div>
   );
 
   const renderNonMobileBar = () => (
@@ -190,7 +200,7 @@ function AppMenuBar({
               className={classes.AppMenuBarRightOptions}
             >
               {
-                root.categories.map(category => (
+                [CATEGORY_FEATURED, ...root.categories].map(category => (
                   <Grid
                     item
                     xs={"auto"} sm={"auto"} md={"auto"} lg={"auto"}
@@ -198,6 +208,7 @@ function AppMenuBar({
                     <AppMenuBarItem
                       key={category._id}
                       category={category}
+                      onSelectCategory={onSelectCategory}
                     />
                   </Grid>
                 ))
@@ -275,7 +286,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    dispatch,
+    onSelectCategory: (category) => dispatch(selectCategory(category)),
   }
 };
 

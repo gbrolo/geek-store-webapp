@@ -3,7 +3,15 @@ import {
   UNMOUNT,
   GET_PRODUCTS,
   SET_PRODUCTS,
+  SELECT_CATEGORY,
 } from './constants';
+
+export function selectCategory(category) {
+  return {
+    type: SELECT_CATEGORY,
+    category,
+  };
+}
 
 export function setProducts(productsRequestPayload) {
   return {
