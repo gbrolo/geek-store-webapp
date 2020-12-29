@@ -3,39 +3,26 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import clsx from 'clsx';
-import { motion } from "framer-motion";
 import deepcopy from 'deepcopy';
 import {
   Grid,
   List,
-  Grow,
-  Link,
-  Chip,
-  Fade,
-  Dialog,
-  AppBar,
-  darken, 
+  Grow,  
+  Chip,    
+  AppBar,   
   Button,
   Divider,
-  Toolbar,
-  lighten, 
+  Toolbar,  
   ListItem,
-  TextField,
-  IconButton,
+  TextField,  
   Typography,
-  makeStyles,
-  Breadcrumbs,
-  ListItemIcon,
+  makeStyles,    
   ListItemText,    
 } from '@material-ui/core';
-import {
-  Home,
+import {  
   ArrowBack,
   CheckCircle,
-  HighlightOff,
-  NavigateNext,
-  FiberManualRecord,
+  HighlightOff,    
 } from '@material-ui/icons';
 // import PropTypes from 'prop-types';
 // import styled from 'styled-components';

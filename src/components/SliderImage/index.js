@@ -13,8 +13,7 @@ import {
   Fade,
   Chip,
   Grow,
-  Zoom,
-  Slide,
+  Zoom,  
   Avatar,
   Dialog,
   Hidden,
@@ -23,9 +22,7 @@ import {
 } from '@material-ui/core';
 import {
   Close,
-  TouchApp,
-  ChevronLeft,
-  ChevronRight,
+  TouchApp,  
   FiberManualRecord,
   FiberManualRecordOutlined,
 } from '@material-ui/icons';

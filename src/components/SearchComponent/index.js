@@ -1,5 +1,4 @@
 import React, { memo, useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';

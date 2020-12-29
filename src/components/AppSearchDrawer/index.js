@@ -5,7 +5,6 @@
  */
 
 import React, { memo, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -16,8 +15,7 @@ import {
   Chip,  
   Slide,
   Button,
-  Avatar,
-  darken,
+  Avatar,  
   Toolbar,
   lighten,
   ListItem,

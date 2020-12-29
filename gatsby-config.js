@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Geek Store`,
+    title: `La tienda más Geek`,
     description: `A simple retail store`,
     author: `@gbrolo`,
   },

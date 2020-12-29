@@ -5,24 +5,17 @@
  */
 
 import React, { memo, useState } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import {
-  List,
-  Slide,
+  List,  
   ListItem,
   makeStyles,
   Typography,
   ListItemText,
-  SwipeableDrawer,
-  ListItemSecondaryAction,
+  SwipeableDrawer,  
 } from '@material-ui/core';
-import {
-  ArrowDropUp,
-  ArrowDropDown,
-} from '@material-ui/icons';
 
 import { useInjectSaga } from '../../utils/injectSaga';
 import { useInjectReducer } from '../../utils/injectReducer';
@@ -30,7 +23,7 @@ import makeSelectAppDrawer from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { toggleAppDrawer } from './actions';
-import { allItemValue, CATEGORY_FEATURED, flashNavItem, homeNavItem } from '../../components/AppMenuBar/constants';
+import { CATEGORY_FEATURED } from '../../components/AppMenuBar/constants';
 import makeSelectRoot from '../../rootSelectors';
 import { selectCategory } from '../ProductsContainer/actions';
 

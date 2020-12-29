@@ -4,14 +4,11 @@ import { motion } from 'framer-motion';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import {
-  Grid,
-  Menu,
-  Slide,
-  Badge,
+  Grid,  
+  Slide,  
   AppBar,
   Button,
-  Toolbar,
-  MenuItem,
+  Toolbar,  
   IconButton,
   Typography,
   makeStyles,
@@ -19,10 +16,6 @@ import {
 import {
   MenuSharp,
   SearchSharp,
-  ArrowDropDown,
-  TranslateSharp,
-  ShoppingCartSharp,
-  AccountCircleSharp,
 } from '@material-ui/icons';
 import makeSelectRoot from '../../rootSelectors';
 import { selectCategory } from '../ProductsContainer/actions';
@@ -105,7 +98,7 @@ const useStyles = makeStyles(theme => ({
   },
   AppMenuBarItem: {
     textTransform: 'uppercase',
-    fontSize: '0.75em',    
+    fontSize: '0.75rem',    
     color: theme.palette.primary.contrastText,
     '&:hover': {
       textDecoration: 'underline',
