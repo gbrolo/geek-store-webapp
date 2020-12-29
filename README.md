@@ -40,3 +40,11 @@ Each component resides at its own folder inside ```/src/components``` directory.
 
 ### Axios
 This app uses ```axios``` to handle API requests. ```src/axios/axios.js``` contains an axios instance configuration. This instance is used for all requests. You can format axios requests on ```src/axios/response.js``` file. ```src/axios/providers``` directory contains providers to handle requests to the ```geek-store-api``` REST api.
+
+## Store functions
+This is a SPA in which you can fetch products by category, but you can also fuzzy search products. Try to search for example for ```jedi```. This is an example of fuzzy search by tags since products stored on database contain tags. You can also search by name.
+
+## Mobile support
+Mobile support includes a slidable app Drawer component, which you can activate by tapping the hamburguer menu icon or swiping from the left of the screen.
+
+Another drawer is included, to handle search queries. This is accessible by tapping the search icon or swiping from the right of the screen.
