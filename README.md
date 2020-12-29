@@ -4,7 +4,7 @@
 </div>
 
 ## Production
-Run ```npm run build``` and then run ```npm run serve``` locally on your machine to start app in production mode. You'll need Node.js and Gatsby installed locally on your machine for this to work.
+Run ```npm run production```, (which will run ```npm run build``` and ```npm run serve```) locally on your machine to start app in production mode. You'll need Node.js and Gatsby installed locally on your machine for this to work.
 
 This script will run tests, then build the app with Gatsby and then serve it locally on ```http://localhost:9000```.
 
