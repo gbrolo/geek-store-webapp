@@ -40,26 +40,31 @@
     "typeface-roboto": "^1.1.13"
   },
   "devDependencies": {
-    "prettier": "2.2.1",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/preset-env": "^7.4.2",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/plugin-proposal-pipeline-operator": "^7.3.2",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/plugin-transform-regenerator": "^7.12.1"
+    "@babel/plugin-transform-regenerator": "^7.12.1",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^26.6.3",
+    "babel-preset-gatsby": "^0.9.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^26.6.3",
+    "prettier": "2.2.1",
+    "react-test-renderer": "^17.0.1"
   },
   "keywords": [
     "gatsby"
   ],
   "license": "0BSD",
   "scripts": {
-    "build": "gatsby build",
+    "build": "npm run test && gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",

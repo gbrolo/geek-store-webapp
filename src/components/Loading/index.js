@@ -17,17 +17,12 @@ const Loading = (props) => {
   const classes = useStyles(props.style);
 
   const renderProgress = (render) => (
-    <Fade
-      in={render}
-      mountOnEnter
-      unmountOnExit
-      {...(render ? { timeout: 1000 } : { timeout: 500 })}
-    >
-      <CircularProgress 
-        size={props.size}
-        className={classes.progress} 
-      />
-    </Fade>
+    render ?
+    <CircularProgress 
+      size={props.size}
+      className={classes.progress} 
+    /> :
+    null
   );
 
   return (
